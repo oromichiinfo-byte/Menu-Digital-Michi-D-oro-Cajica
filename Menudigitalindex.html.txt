@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michi D'Oro - Menú Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dorado: #D4AF37; /* Dorado clásico */
+            --color-palo-rosa: #e6b8b8; /* Palo de rosa suave */
+            --color-verde-manzana: #8DB600; /* Verde manzana vibrante */
+            --color-fondo: #FDFBF7; /* Blanco roto cálido */
+            --color-texto: #333333; /* Gris muy oscuro para legibilidad */
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Utilidades de color personalizadas de Tailwind */
+        .text-dorado { color: var(--color-dorado); }
+        .bg-dorado { background-color: var(--color-dorado); }
+        .border-dorado { border-color: var(--color-dorado); }
+        
+        .text-palo-rosa { color: var(--color-palo-rosa); }
+        .bg-palo-rosa { background-color: var(--color-palo-rosa); }
+        
+        .text-verde-manzana { color: var(--color-verde-manzana); }
+        .bg-verde-manzana { background-color: var(--color-verde-manzana); }
+
+        /* Estilos para el acordeón del menú */
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .category-header.active {
+            color: var(--color-dorado);
+        }
+        
+        .category-header.active .icon-chevron {
+            transform: rotate(180deg);
+        }
+
+        .icon-chevron {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Decoración de fondo */
+        .bg-pattern {
+            background-image: radial-gradient(var(--color-palo-rosa) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen relative">
+    <div class="bg-pattern"></div>
+
+    <div class="max-w-md mx-auto bg-white min-h-screen shadow-xl relative overflow-hidden">
+        
+        <header class="pt-10 pb-6 px-6 text-center relative">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-dorado via-palo-rosa to-verde-manzana" style="background-image: linear-gradient(to right, var(--color-dorado), var(--color-palo-rosa), var(--color-verde-manzana));"></div>
+            
+            <img src="Recurso 35.png" alt="Michi D'Oro Logo" class="w-48 mx-auto mb-4" onerror="this.src='https://placehold.co/200x100/ffffff/333333?text=Michi+D%27Oro'">
+            
+            <p class="font-serif italic text-sm text-gray-500 mt-2">"Lo Lindo de la Vida"</p>
+            <div class="w-16 h-0.5 bg-dorado mx-auto mt-4 rounded"></div>
+        </header>
+
+        <main class="px-6 pb-12">
+            <h1 class="text-3xl font-serif text-center mb-8 tracking-wider">Menú</h1>
+
+            <div id="menu-container" class="space-y-4">
+                <!-- Las categorías se insertarán aquí con JavaScript -->
+            </div>
+        </main>
+
+        <footer class="bg-gray-50 py-8 px-6 text-center border-t border-gray-100">
+            <p class="font-serif text-dorado text-lg mb-2">Michi D'Oro</p>
+            <p class="text-sm text-gray-500 mb-4">Gelato Italiano Artesanal</p>
+            <div class="flex justify-center space-x-4 mb-6">
+                <!-- Iconos de redes sociales simulados -->
+                <a href="#" class="text-gray-400 hover:text-palo-rosa transition"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" /></svg></a>
+                <a href="#" class="text-gray-400 hover:text-dorado transition"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+            </div>
+            <p class="text-xs text-gray-400">© 2026 Michi D'Oro. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Datos del Menú (Ejemplo, puedes editarlos fácilmente)
+        const menuData = [
+            {
+                category: "Gelato Clásico",
+                description: "Nuestras recetas tradicionales italianas.",
+                icon: "🍦",
+                items: [
+                    { name: "Pistacchio Puro", description: "Elaborado con pistachos de Bronte 100%.", price: "$4.50", badges: ["Top Ventas"] },
+                    { name: "Cioccolato Fondente", description: "Chocolate oscuro intenso al 72%.", price: "$4.00", badges: ["Vegano"] },
+                    { name: "Fior di Latte", description: "La base más pura, crema de leche fresca.", price: "$3.50", badges: [] },
+                    { name: "Nocciola", description: "Avellanas tostadas del Piamonte.", price: "$4.50", badges: [] }
+                ]
+            },
+            {
+                category: "Sabores de Temporada",
+                description: "Creaciones únicas por tiempo limitado.",
+                icon: "🍓",
+                items: [
+                    { name: "Limone e Basilico", description: "Sorbete refrescante de limón con un toque de albahaca fresca.", price: "$4.00", badges: ["Nuevo", "Refrescante"] },
+                    { name: "Fragola", description: "Sorbete de fresas frescas recolectadas localmente.", price: "$4.00", badges: ["Vegano"] },
+                    { name: "Mango Tropical", description: "Dulce y cremoso gelato de mango maduro.", price: "$4.20", badges: [] }
+                ]
+            },
+            {
+                category: "Especialidades",
+                description: "Para compartir o darte un gusto extra.",
+                icon: "🍨",
+                items: [
+                    { name: "Coppa Michi", description: "3 bolas de gelato, salsa de chocolate dorado, crema batida y avellanas.", price: "$9.50", badges: ["Recomendado"] },
+                    { name: "Affogato al Caffè", description: "Una bola de Fior di Latte ahogada en espresso caliente.", price: "$5.50", badges: [] },
+                    { name: "Brioche con Gelato", description: "Tradicional pan brioche siciliano relleno de tu gelato favorito.", price: "$6.00", badges: [] }
+                ]
+            },
+            {
+                category: "Bebidas",
+                description: "Para acompañar tu momento dulce.",
+                icon: "☕",
+                items: [
+                    { name: "Espresso Italiano", description: "Café de grano recién molido.", price: "$2.50", badges: [] },
+                    { name: "Cappuccino", description: "Espresso con leche cremosa y espuma.", price: "$3.50", badges: [] },
+                    { name: "Agua Mineral", description: "Con o sin gas.", price: "$2.00", badges: [] }
+                ]
+            }
+        ];
+
+        const menuContainer = document.getElementById('menu-container');
+
+        function createBadge(text) {
+            let bgColorClass = "bg-dorado"; // Por defecto dorado
+            let textColorClass = "text-white";
+            
+            if (text.toLowerCase() === 'vegano') {
+                bgColorClass = "bg-verde-manzana";
+                textColorClass = "text-white";
+            } else if (text.toLowerCase() === 'nuevo') {
+                bgColorClass = "bg-palo-rosa";
+                textColorClass = "text-white";
+            }
+
+            return `<span class="inline-block px-2 py-0.5 mt-1 mr-1 text-[10px] font-bold uppercase rounded-full ${bgColorClass} ${textColorClass} shadow-sm">${text}</span>`;
+        }
+
+        function renderMenu() {
+            menuData.forEach((section, index) => {
+                const sectionHTML = `
+                    <div class="border border-gray-100 rounded-xl bg-white shadow-sm overflow-hidden mb-4">
+                        <button class="category-header w-full flex items-center justify-between p-4 text-left focus:outline-none focus:ring-2 focus:ring-palo-rosa focus:ring-opacity-50 transition-colors hover:bg-gray-50" onclick="toggleCategory(${index})">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-2xl">${section.icon}</span>
+                                <div>
+                                    <h2 class="font-serif text-xl font-semibold tracking-wide">${section.category}</h2>
+                                    <p class="text-xs text-gray-500 mt-0.5">${section.description}</p>
+                                </div>
+                            </div>
+                            <svg class="icon-chevron w-5 h-5 text-gray-400" id="chevron-${index}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        
+                        <div id="content-${index}" class="category-content bg-gray-50">
+                            <div class="p-4 pt-2 space-y-4">
+                                ${section.items.map(item => `
+                                    <div class="flex justify-between items-start border-b border-gray-200 pb-3 last:border-0 last:pb-0">
+                                        <div class="pr-4 flex-1">
+                                            <h3 class="font-semibold text-gray-800 text-base">${item.name}</h3>
+                                            <p class="text-sm text-gray-500 mt-0.5 leading-snug">${item.description}</p>
+                                            <div class="mt-1">
+                                                ${item.badges.map(badge => createBadge(badge)).join('')}
+                                            </div>
+                                        </div>
+                                        <div class="font-serif font-bold text-dorado text-lg whitespace-nowrap">
+                                            ${item.price}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                menuContainer.innerHTML += sectionHTML;
+            });
+        }
+
+        function toggleCategory(index) {
+            const content = document.getElementById(`content-${index}`);
+            const header = content.previousElementSibling;
+            
+            // Cerrar otros abiertos (opcional, si quieres que solo uno esté abierto a la vez)
+            /*
+            document.querySelectorAll('.category-content').forEach((el, i) => {
+                if (i !== index && el.style.maxHeight) {
+                    el.style.maxHeight = null;
+                    el.previousElementSibling.classList.remove('active');
+                }
+            });
+            */
+
+            header.classList.toggle('active');
+            
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        // Inicializar el menú
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenu();
+            // Abrir la primera categoría por defecto
+            setTimeout(() => toggleCategory(0), 100); 
+        });
+
+    </script>
+</body>
+</html>
